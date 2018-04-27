@@ -9,4 +9,8 @@ router.get('/', function(req, res){
   res.render('chat');
 });
 
+router.post('/login', function(req, res){
+  const {username, password} = {req.body.username, req.body.password};
+});
+
 module.exports = router;
