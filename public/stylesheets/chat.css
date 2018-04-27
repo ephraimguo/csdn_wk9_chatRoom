@@ -1,0 +1,46 @@
+.container{
+    font-family: "Helvetica Neue", "Heiti SC", SansSerif;
+    color: brown;
+    min-height: 400px;
+    min-width: 600px;
+    background: linear-gradient(to left, #00B7FF, #42e2f4);
+    margin: 50px;
+    box-sizing: border-box;
+    position: relative;
+}
+.chat-room{
+    min-height: 380px;
+    width: 70%;
+    float: left;
+    position: relative;
+    top: 10px;
+    box-sizing: border-box;
+    background: #ccc;
+    opacity: 0.3;
+}
+.chat-room>h4{
+    font-size: 20px;
+    margin: 0;
+    padding: 0 20px;
+    height: 20px;
+    line-height: 20px;
+}
+.messages{
+    min-height: 360px;
+    box-sizing: border-box;
+    background: linear-gradient(to right, #cccccc, #333);
+    opacity: 0.7;
+}
+
+
+.profile{
+    min-height: 200px;
+    width: 28%;
+    float: left;
+    position: relative;
+    box-sizing: border-box;
+    background: #ccc;
+    opacity: 0.7;
+    top: 10px;
+    margin-left: 10px;
+}
