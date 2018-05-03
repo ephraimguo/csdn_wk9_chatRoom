@@ -5,33 +5,52 @@
     <link rel="stylesheet" href="./stylesheets/chat.css">
     <script src></script>
     <script>
+        window.onload = function(){
+          var loginForm = document.querySelector('.login');
+          var signupForm = document.querySelector('.signup');
+          var signupPass = signupForm.querySelectorAll('input[type=password]')[0];
+          var signupCon = signupForm.querySelectorAll('input[type=password]')[1];
+          var notification = signupForm.querySelector('.notification');
 
+          signupForm.onchange = function(){
+            if(signupPass.value && signupCon.value && signupPass.value === signupCon.value){
+              notification.style.color = '#42f47d';
+              notification.innerHTML = 'Password mathcing';
+            }else if(signupPass.value && signupCon.value && signupPass.value !== signupCon.value){
+              notification.style.color = '#bc2e1e';
+              notification.innerHTML = 'Password not matching';
+            }else{
+              console.log('no input');
+            }
+          }
+        }
     </script>
 </head>
 <body>
     <div class="container">
         <div class="chat-room">
-            <h4></h4>
+            <h4><%=title%></h4>
             <div class="messages">
 
             </div>
         </div>
         <div class="profile">
             <%if(!user){%>
-            <form action="/chat/login" method="post">
+            <form class="user login" action="/chat/login" method="post">
                 <input type="text" name="username" value="" placeholder="user name">
                 <input type="password" name="password" value="" placeholder="password">
                 <input type="submit" value="log in">
             </form>
             <%}else{%>
-                <h4>Welcom Dear</h4>
+                <h4>Welcoem Dear</h4>
                 <span><%=user.name%></span>
             <%}%>
 
             <br>
 
-            <form action="/chat/signup" method="post">
-                <input type="text" name="username" value="" placeholder="key in username to signup">
+            <form class='user signup' action="/chat/signup" method="post">
+                <p class="notification"></p>
+                <input type="text" name="username" value="" placeholder="key in username to signup" >
                 <input type="password" name="password" value="" placeholder="password">
                 <input type="password" name="confirmation" value="" placeholder="confirm ur password">
                 <input type="submit" value="Sign Up Now">

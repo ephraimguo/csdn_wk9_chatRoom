@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/chatRoom');
 mongoose.Promise = Promise;
 
 const User = mongoose.model("User", {
@@ -7,4 +7,4 @@ const User = mongoose.model("User", {
   uPass: String,
 });
 
-module.expport = User;
+module.exports = User;

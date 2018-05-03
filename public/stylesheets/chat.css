@@ -44,3 +44,8 @@
     top: 10px;
     margin-left: 10px;
 }
+
+.user > input{
+  display: block;
+  margin: 10px;
+}
