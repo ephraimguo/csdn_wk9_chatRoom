@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
-mongoose.PRomise = Promise;
+mongoose.Promise = Promise;
 
 const User = mongoose.model("User", {
   uName: String,

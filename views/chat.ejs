@@ -11,18 +11,32 @@
 <body>
     <div class="container">
         <div class="chat-room">
-            <h4><%=title%></h4>
+            <h4></h4>
             <div class="messages">
 
             </div>
         </div>
         <div class="profile">
-            <%if()%>
-            <form action="/login" method="post">
+            <%if(!user){%>
+            <form action="/chat/login" method="post">
                 <input type="text" name="username" value="" placeholder="user name">
                 <input type="password" name="password" value="" placeholder="password">
                 <input type="submit" value="log in">
             </form>
+            <%}else{%>
+                <h4>Welcom Dear</h4>
+                <span><%=user.name%></span>
+            <%}%>
+
+            <br>
+
+            <form action="/chat/signup" method="post">
+                <input type="text" name="username" value="" placeholder="key in username to signup">
+                <input type="password" name="password" value="" placeholder="password">
+                <input type="password" name="confirmation" value="" placeholder="confirm ur password">
+                <input type="submit" value="Sign Up Now">
+            </form>
+
         </div>
 
     </div>
