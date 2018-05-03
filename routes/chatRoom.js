@@ -18,14 +18,20 @@ router.get('/', function(req, res){
   res.render('chat');
 });
 
-router.post('/login', function(req, res){
+router.post('/login', async function(req, res){
   const {username, password} = req.body;
-  console.log(username, password);
+  // console.log(username, password);
+  let u =await User.find({uName:username, uPass:password});
+  if(u.length === 0){
+    console.log('login failed');
+  }
+  else{
+    req.session.user = {name: username}
+  }
   res.redirect('back');
 });
 
 router.post('/signup', async function(req, res){
-  // await User.remove();
   const {username, password, confirmation} = req.body;
   console.log(username, password, confirmation);
   let finding = await User.find({uName:username});
@@ -43,6 +49,13 @@ router.post('/signup', async function(req, res){
   }
   console.log('--------');
   console.log(await User.find(), 'user find all');
+  res.redirect('back');
+});
+
+router.post('/sendmsg', async function(req, res){
+  const msg = req.body.msg;
+
+  console.log(msg);
   res.redirect('back');
 });
 

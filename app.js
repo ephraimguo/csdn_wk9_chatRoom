@@ -10,7 +10,7 @@ const FileStore = require('session-file-store')(session);
 const sessionMdlWare = session({
   store: new FileStore(),
   secret: 'keyboard cat',
-  cookie: {maxAge: 60000}
+  cookie: {maxAge: 60000*5}
 });
 
 var indexRouter = require('./routes/index');
@@ -18,6 +18,9 @@ var usersRouter = require('./routes/users');
 var chat = require('./routes/chatRoom');
 
 var app = express();
+var server = require("http").Server(app);
+var io = require('socket.io')(server);
+server.listen(3000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

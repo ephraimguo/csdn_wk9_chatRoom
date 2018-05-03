@@ -41,13 +41,7 @@
                 <input type="password" name="password" value="" placeholder="password">
                 <input type="submit" value="log in">
             </form>
-            <%}else{%>
-                <h4>Welcoem Dear</h4>
-                <span><%=user.name%></span>
-            <%}%>
-
             <br>
-
             <form class='user signup' action="/chat/signup" method="post">
                 <p class="notification"></p>
                 <input type="text" name="username" value="" placeholder="key in username to signup" >
@@ -55,6 +49,17 @@
                 <input type="password" name="confirmation" value="" placeholder="confirm ur password">
                 <input type="submit" value="Sign Up Now">
             </form>
+
+            <%}else{%>
+            <span>Welcome Dear</span>
+            <strong><%=user.name%></strong>
+            <form class='msg-input' action="/chat/sendmsg" method="post">
+                <textarea name="msg" id="" cols="30" rows="10"></textarea>
+                <br>
+                <input type="submit" value="Send~">
+            </form>
+            <%}%>
+
 
         </div>
 
