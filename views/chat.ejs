@@ -7,27 +7,53 @@
     <script>
       window.onload = function(){
           var loginForm = document.querySelector('.login');
-          var signupForm = document.querySelector('.signup');
-          var signupPass = signupForm.querySelectorAll('input[type=password]')[0];
-          var signupCon = signupForm.querySelectorAll('input[type=password]')[1];
-          var notification = signupForm.querySelector('.notification');
+          var signupForm = document.querySelector('.signup') || undefined;
+          var signupPass = signupForm?signupForm.querySelectorAll('input[type=password]')[0]:"";
+          var signupCon = signupForm?signupForm.querySelectorAll('input[type=password]')[1]:"";
+          var notification = signupForm?signupForm.querySelector('.notification') : undefined;
+          var msgInput = document.querySelector('.msg-input > textarea') || undefined;
+          var msgBox = document.querySelector('.messages');
 
-          signupForm.onchange = function(){
-            if(signupPass.value && signupCon.value && signupPass.value === signupCon.value){
-              notification.style.color = '#42f47d';
-              notification.innerHTML = 'Password matching';
-            }else if(signupPass.value && signupCon.value && signupPass.value !== signupCon.value){
-              notification.style.color = '#bc2e1e';
-              notification.innerHTML = 'Password not matching';
-            }else{
-              console.log('no input');
+          if(signupForm){
+            signupForm.onchange = function(){
+              if(signupPass.value && signupCon.value && signupPass.value === signupCon.value){
+                notification.style.color = '#42f47d';
+                notification.innerHTML = 'Password matching';
+              }else if(signupPass.value && signupCon.value && signupPass.value !== signupCon.value){
+                notification.style.color = '#bc2e1e';
+                notification.innerHTML = 'Password not matching';
+              }else{
+                console.log('no input');
+              }
             }
           }
-        }
-      var socket = io.connect();
-      socket.on('sending', function(data,callback){
-        console.log(data);
-      })
+
+
+
+        var socket = io.connect();
+        msgInput.addEventListener('change', function (event){
+          console.log(event.target.value);
+          socket.emit('sending', event.target.value);
+        })
+        socket.on('display', msges=>{
+          let div_msg = document.createElement('div');
+          div_msg.innerHTML = `
+          <p id="msg-content">${msges}</p><span id="msg-timing"> (sent time${new Date})</span>
+          `
+          msgBox.appendChild(div_msg);
+          var msgesss = msgBox.querySelectorAll('div');
+          for(let i=0; i<msgesss.length; i++){
+            if(i%2===0){
+              msgesss[i].style.color = "#000";
+            }
+          }
+        });
+
+      }
+
+
+
+
 
     </script>
 </head>
@@ -60,7 +86,7 @@
             <strong><%=user.name%></strong>
             <a href="/chat/logout">Logout</a>
             <form class='msg-input' action="/chat/sendmsg" method="post">
-                <textarea name="msg" id="" cols="30" rows="10"></textarea>
+                <textarea name="msg"  id="" cols="30" rows="10"></textarea>
                 <br>
                 <input type="submit" value="Send~">
             </form>
@@ -70,6 +96,8 @@
         </div>
 
     </div>
+    <script>
 
+    </script>
 </body>
 </html>

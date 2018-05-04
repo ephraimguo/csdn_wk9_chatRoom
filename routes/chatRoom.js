@@ -14,7 +14,7 @@ var Msg = require('./models/users').Msg;
 
 router.get('/', function(req, res){
   const user = req.session.user || undefined;
-  res.locals.title = 'fun chat room';
+  res.locals.title = 'Member Function Component';
   res.locals.user = user;
   res.render('chat');
 });
@@ -60,7 +60,7 @@ router.post('/signup', async function(req, res){
 router.post('/sendmsg', async function(req, res){
   const msg = req.body.msg;
 
-  console.log(msg);
+  console.log(msg,'backend print by post method');
   res.redirect('back');
 });
 

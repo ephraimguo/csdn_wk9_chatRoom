@@ -24,7 +24,11 @@ server.listen(3000);
 
 io.on('connection', function(socket){
   console.log('************* connection received ************');
-  socket.emit('sending', 'connection successful message');
+  // socket.emit('sending', 'connection successful message');
+  socket.on('sending', msges=>{
+    console.log(msges);
+    io.emit('display', msges);
+  });
 });
 
 // view engine setup
