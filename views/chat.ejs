@@ -3,9 +3,9 @@
 <head>
     <title>chat room</title>
     <link rel="stylesheet" href="./stylesheets/chat.css">
-    <script src></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-        window.onload = function(){
+      window.onload = function(){
           var loginForm = document.querySelector('.login');
           var signupForm = document.querySelector('.signup');
           var signupPass = signupForm.querySelectorAll('input[type=password]')[0];
@@ -15,7 +15,7 @@
           signupForm.onchange = function(){
             if(signupPass.value && signupCon.value && signupPass.value === signupCon.value){
               notification.style.color = '#42f47d';
-              notification.innerHTML = 'Password mathcing';
+              notification.innerHTML = 'Password matching';
             }else if(signupPass.value && signupCon.value && signupPass.value !== signupCon.value){
               notification.style.color = '#bc2e1e';
               notification.innerHTML = 'Password not matching';
@@ -24,6 +24,11 @@
             }
           }
         }
+      var socket = io.connect();
+      socket.on('sending', function(data,callback){
+        console.log(data);
+      })
+
     </script>
 </head>
 <body>
@@ -53,6 +58,7 @@
             <%}else{%>
             <span>Welcome Dear</span>
             <strong><%=user.name%></strong>
+            <a href="/chat/logout">Logout</a>
             <form class='msg-input' action="/chat/sendmsg" method="post">
                 <textarea name="msg" id="" cols="30" rows="10"></textarea>
                 <br>

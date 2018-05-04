@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
-// var User = require('./models/users');
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/chatRoom');
-mongoose.Promise = Promise;
-const User = mongoose.model("User", {
-  uName: String,
-  uPass: String,
-});
+var User = require('./models/users').User;
+var Msg = require('./models/users').Msg;
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/chatRoom');
+// mongoose.Promise = Promise;
+// const User = mongoose.model("User", {
+//   uName: String,
+//   uPass: String,
+// });
 
 
 
@@ -28,6 +29,10 @@ router.post('/login', async function(req, res){
   else{
     req.session.user = {name: username}
   }
+  res.redirect('back');
+});
+router.get('/logout', function(req, res){
+  req.session.user = undefined;
   res.redirect('back');
 });
 
